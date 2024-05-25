@@ -1,0 +1,40 @@
+[0.918s] Invoking command in '/home/robot/ws_aprendendo_ros2/src/projeto_final': PYTHONPATH=/home/robot/ws_aprendendo_ros2/src/build/projeto_final/prefix_override:/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/projeto_final build --build-base /home/robot/ws_aprendendo_ros2/src/build/projeto_final/build install --record /home/robot/ws_aprendendo_ros2/src/build/projeto_final/install.log --single-version-externally-managed
+[1.229s] running egg_info
+[1.230s] creating ../build/projeto_final/projeto_final.egg-info
+[1.232s] writing ../build/projeto_final/projeto_final.egg-info/PKG-INFO
+[1.233s] writing dependency_links to ../build/projeto_final/projeto_final.egg-info/dependency_links.txt
+[1.234s] writing entry points to ../build/projeto_final/projeto_final.egg-info/entry_points.txt
+[1.235s] writing requirements to ../build/projeto_final/projeto_final.egg-info/requires.txt
+[1.236s] writing top-level names to ../build/projeto_final/projeto_final.egg-info/top_level.txt
+[1.239s] writing manifest file '../build/projeto_final/projeto_final.egg-info/SOURCES.txt'
+[1.241s] reading manifest file '../build/projeto_final/projeto_final.egg-info/SOURCES.txt'
+[1.245s] writing manifest file '../build/projeto_final/projeto_final.egg-info/SOURCES.txt'
+[1.245s] running build
+[1.246s] running build_py
+[1.246s] creating /home/robot/ws_aprendendo_ros2/src/build/projeto_final/build
+[1.247s] creating /home/robot/ws_aprendendo_ros2/src/build/projeto_final/build/lib
+[1.247s] creating /home/robot/ws_aprendendo_ros2/src/build/projeto_final/build/lib/projeto_final
+[1.248s] copying projeto_final/robot.py -> /home/robot/ws_aprendendo_ros2/src/build/projeto_final/build/lib/projeto_final
+[1.249s] copying projeto_final/__init__.py -> /home/robot/ws_aprendendo_ros2/src/build/projeto_final/build/lib/projeto_final
+[1.249s] copying projeto_final/r2d2.py -> /home/robot/ws_aprendendo_ros2/src/build/projeto_final/build/lib/projeto_final
+[1.251s] running install
+[1.252s] running install_lib
+[1.254s] creating /home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final
+[1.255s] copying /home/robot/ws_aprendendo_ros2/src/build/projeto_final/build/lib/projeto_final/robot.py -> /home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final
+[1.280s] copying /home/robot/ws_aprendendo_ros2/src/build/projeto_final/build/lib/projeto_final/__init__.py -> /home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final
+[1.280s] copying /home/robot/ws_aprendendo_ros2/src/build/projeto_final/build/lib/projeto_final/r2d2.py -> /home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final
+[1.280s] byte-compiling /home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final/robot.py to robot.cpython-310.pyc
+[1.280s] byte-compiling /home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final/__init__.py to __init__.cpython-310.pyc
+[1.281s] byte-compiling /home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final/r2d2.py to r2d2.cpython-310.pyc
+[1.281s] running install_data
+[1.282s] creating /home/robot/ws_aprendendo_ros2/src/install/projeto_final/share/ament_index
+[1.282s] creating /home/robot/ws_aprendendo_ros2/src/install/projeto_final/share/ament_index/resource_index
+[1.282s] creating /home/robot/ws_aprendendo_ros2/src/install/projeto_final/share/ament_index/resource_index/packages
+[1.282s] copying resource/projeto_final -> /home/robot/ws_aprendendo_ros2/src/install/projeto_final/share/ament_index/resource_index/packages
+[1.283s] copying package.xml -> /home/robot/ws_aprendendo_ros2/src/install/projeto_final/share/projeto_final
+[1.283s] running install_egg_info
+[1.283s] Copying ../build/projeto_final/projeto_final.egg-info to /home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final-0.0.0-py3.10.egg-info
+[1.291s] running install_scripts
+[1.318s] Installing r2d2 = projeto_final.r2d2:mainrobot script to /home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/projeto_final
+[1.320s] writing list of installed files to '/home/robot/ws_aprendendo_ros2/src/build/projeto_final/install.log'
+[1.360s] Invoked command in '/home/robot/ws_aprendendo_ros2/src/projeto_final' returned '0': PYTHONPATH=/home/robot/ws_aprendendo_ros2/src/build/projeto_final/prefix_override:/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/projeto_final build --build-base /home/robot/ws_aprendendo_ros2/src/build/projeto_final/build install --record /home/robot/ws_aprendendo_ros2/src/build/projeto_final/install.log --single-version-externally-managed

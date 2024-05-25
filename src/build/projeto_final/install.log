@@ -1,0 +1,16 @@
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final/robot.py
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final/__init__.py
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final/r2d2.py
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final/__pycache__/robot.cpython-310.pyc
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final/__pycache__/__init__.cpython-310.pyc
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final/__pycache__/r2d2.cpython-310.pyc
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/share/ament_index/resource_index/packages/projeto_final
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/share/projeto_final/package.xml
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final-0.0.0-py3.10.egg-info/dependency_links.txt
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final-0.0.0-py3.10.egg-info/PKG-INFO
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final-0.0.0-py3.10.egg-info/requires.txt
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final-0.0.0-py3.10.egg-info/zip-safe
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final-0.0.0-py3.10.egg-info/top_level.txt
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final-0.0.0-py3.10.egg-info/SOURCES.txt
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/python3.10/site-packages/projeto_final-0.0.0-py3.10.egg-info/entry_points.txt
+/home/robot/ws_aprendendo_ros2/src/install/projeto_final/lib/projeto_final/r2d2 = projeto_final.r2d2:mainrobot

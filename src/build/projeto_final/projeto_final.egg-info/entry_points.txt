@@ -1,0 +1,3 @@
+[console_scripts]
+r2d2 = projeto_final.r2d2:mainrobot = projeto_final.robot:main
+
