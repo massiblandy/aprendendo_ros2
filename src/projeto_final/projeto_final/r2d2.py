@@ -42,6 +42,7 @@ import numpy
 import math
 
 from geometry_msgs.msg import Twist, Vector3
+from nav_msgs.msg import Odometry
 
 import tf_transformations
 

@@ -71,7 +71,7 @@ def astar(matrix, start, end):
     return None
 
 def add_to_open(open_list, child):
-    for node in open_list:
+    for i, node in enumerate(open_list):
         if child == node and child.g >= node.g:
             return False
     return True
@@ -103,10 +103,9 @@ class RobotControl(R2D2):
         self.curva_esquerda = Twist(linear=Vector3(x=0.1, y=0.0, z=0.0), angular=Vector3(x=0.0, y=0.0, z=0.5))
 
         # Carregar mapa
-        with open('src/map.pgm', 'rb') as pgmf:
-            self.matrix = plt.imread(pgmf)
-            self.matrix = 1.0 * (self.matrix > 250)
-        
+        pgmf = open('src/map.pgm', 'rb')
+        self.matrix = plt.imread(pgmf)
+        self.matrix = 1.0 * (self.matrix > 250)
         plt.imshow(self.matrix, interpolation='nearest', cmap='gray')
         plt.show()
         
