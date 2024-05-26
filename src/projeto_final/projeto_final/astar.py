@@ -82,6 +82,19 @@ def add_to_open(open_list, child):
             return False
     return True
 
+def expand_obstacles(matrix, expansion_size):
+    expanded_matrix = np.copy(matrix)
+    obstacle_indices = np.argwhere(matrix == 0)
+    
+    for idx in obstacle_indices:
+        for x in range(-expansion_size, expansion_size+1):
+            for y in range(-expansion_size, expansion_size+1):
+                new_x, new_y = idx[0] + x, idx[1] + y
+                if 0 <= new_x < matrix.shape[0] and 0 <= new_y < matrix.shape[1]:
+                    expanded_matrix[new_x, new_y] = 0
+    
+    return expanded_matrix
+
 class AStarNode(Node):
     def __init__(self):
         super().__init__('astar_node')
@@ -123,9 +136,8 @@ class AStarNode(Node):
         plt.show()
 
     def convert_coordinates(self, x, y, resolution=0.05, origin=(200, 200)):
-        # Converte as coordenadas do Gazebo para as coordenadas do mapa, considerando rotação de 90 graus
-        map_x = int((x / resolution) + origin[1])  # Gazebo y -> map x
-        map_y = int((-y / resolution) + origin[0])  # Gazebo x -> map y, invertendo sinal
+        map_x = int((x / resolution) + origin[1])  
+        map_y = int((-y / resolution) + origin[0])  
         return (map_y, map_x)
 
     def run_astar(self):
@@ -134,28 +146,25 @@ class AStarNode(Node):
 
         self.path_calculated = True
 
-        # Carregar a matriz do arquivo map.pgm
         matrix = self.load_map('src/map.pgm')
         if matrix is None:
             rclpy.shutdown()
             return
 
-        # Plotar o mapa carregado
+        matrix = expand_obstacles(matrix, expansion_size=2)  
+
         self.plot_map(matrix)
 
-        # Use a posição inicial do robô
         start_x = self.current_pose.position.x
         start_y = self.current_pose.position.y
         start = self.convert_coordinates(start_x, start_y)
         self.get_logger().info(f'Starting A* from: {start} (Gazebo: {start_x}, {start_y})')
 
-        # Defina o objetivo desejado aqui (exemplo: 5, -2 em coordenadas do Gazebo)
-        end_x = 7.5
-        end_y = 3
+        end_x = 0
+        end_y = -7.5
         end = self.convert_coordinates(end_x, end_y)
         self.get_logger().info(f'Ending A* at: {end} (Gazebo: {end_x}, {end_y})')
 
-        # Verificar se os pontos de início e fim estão dentro dos limites da matriz
         if start[0] < 0 or start[0] >= matrix.shape[0] or start[1] < 0 or start[1] >= matrix.shape[1]:
             self.get_logger().error(f'Start position {start} is out of map bounds')
             self.destroy_node()
@@ -172,13 +181,12 @@ class AStarNode(Node):
 
         if path:
             self.get_logger().info(f'Path found with {len(path)} waypoints')
-            # Verifica se o diretório paths existe, se não, cria-o
             if not os.path.exists('paths'):
                 os.makedirs('paths')
             path_file = os.path.abspath('paths/path.csv')
             np.savetxt(path_file, path, delimiter=",")
             self.get_logger().info(f'Path saved to {path_file}')
-            self.plot_path(matrix, path)  # Plotar o caminho no mapa
+            self.plot_path(matrix, path)
             self.path_saved = True
         else:
             self.get_logger().info('No path found')

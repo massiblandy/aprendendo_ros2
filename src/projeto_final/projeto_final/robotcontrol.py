@@ -1,4 +1,4 @@
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Twist, Vector3
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
@@ -15,10 +15,26 @@ class RobotControl(Node):
         self.path = self.load_path('paths/path.csv')  # Carregar o caminho salvo
         self.current_pose = None
         self.current_goal_index = 0  # Índice do ponto atual no caminho
-        self.obstacle_distance = 0.5  # Distância mínima para detectar um obstáculo
+        self.obstacle_distance = 1  # Distância mínima para detectar um obstáculo
+        self.closest_distance_front = float('inf')
+        self.closest_distance_right = float('inf')
+        self.closest_distance_left = float('inf')
+        self.navigation_start()
+
+    def navigation_start(self):
+        self.ir_para_frente = Twist(linear=Vector3(x=0.5, y=0.0, z=0.0), angular=Vector3(x=0.0, y=0.0, z=0.0))
+        self.ir_para_tras = Twist(linear=Vector3(x=-0.5, y=0.0, z=0.0), angular=Vector3(x=0.0, y=0.0, z=0.0))
+        self.girar_direita = Twist(linear=Vector3(x=0.0, y=0.0, z=0.0), angular=Vector3(x=0.0, y=0.0, z=-0.5))
+        self.girar_esquerda = Twist(linear=Vector3(x=0.0, y=0.0, z=0.0), angular=Vector3(x=0.0, y=0.0, z=0.5))
+        self.parar = Twist(linear=Vector3(x=0.0, y=0.0, z=0.0), angular=Vector3(x=0.0, y=0.0, z=0.0))
+        self.curva_direita = Twist(linear=Vector3(x=0.1, y=0.0, z=0.0), angular=Vector3(x=0.0, y=0.0, z=-0.5))
+        self.curva_esquerda = Twist(linear=Vector3(x=0.1, y=0.0, z=0.0), angular=Vector3(x=0.0, y=0.0, z=0.5))
 
     def laser_callback(self, msg):
         self.laser = msg.ranges
+        self.closest_distance_front = min(min(msg.ranges[80:100]), self.obstacle_distance)
+        self.closest_distance_right = min(msg.ranges[0:80])
+        self.closest_distance_left = min(msg.ranges[100:180])
 
     def odom_callback(self, msg):
         self.current_pose = msg.pose.pose
@@ -39,14 +55,6 @@ class RobotControl(Node):
         gazebo_y = (origin[0] - map_y) * resolution  # Corrigir sinal
         self.get_logger().info(f'Converting Map Coordinates ({map_x}, {map_y}) to Gazebo Coordinates ({gazebo_x}, {gazebo_y})')
         return gazebo_x, gazebo_y
-
-    def is_obstacle_ahead(self):
-        if self.laser is not None:
-            front_ranges = self.laser[80:100]  # Considerar a faixa frontal do sensor
-            min_distance = min(front_ranges)
-            self.get_logger().info(f'Minimum obstacle distance: {min_distance}')
-            return min_distance < self.obstacle_distance
-        return False
 
     def follow_path(self):
         if self.path is None or self.path.size == 0 or self.current_pose is None or self.current_goal_index >= len(self.path):
@@ -71,19 +79,23 @@ class RobotControl(Node):
 
         # Controlando o robô para seguir o caminho
         cmd_vel = Twist()
-        if self.is_obstacle_ahead():
+
+        # Se um obstáculo for detectado diretamente à frente, o robô deve parar e ajustar a direção
+        if self.closest_distance_front < self.obstacle_distance:
             self.get_logger().info('Obstacle detected ahead!')
-            # Se houver um obstáculo, o robô deve parar e ajustar a direção
-            cmd_vel.linear.x = 0.0
-            cmd_vel.angular.z = 0.5  # Girar para a direita
+            if self.closest_distance_right < self.closest_distance_left:
+                cmd_vel = self.curva_esquerda
+            else:
+                cmd_vel = self.curva_direita
         else:
-            if distance > 0.1:
-                if abs(angle_to_goal - yaw) > 0.1:  # Se o erro angular for significativo, primeiro alinhe o robô
+            if distance > 1.5:
+                angular_error = angle_to_goal - yaw
+                if abs(angular_error) > 0.1:  # Se o erro angular for significativo, primeiro alinhe o robô
                     cmd_vel.linear.x = 0.0
-                    cmd_vel.angular.z = 1.0 * (angle_to_goal - yaw)  # Ajuste da velocidade angular
+                    cmd_vel.angular.z = 1.0 * angular_error  # Ajuste da velocidade angular
                 else:
                     cmd_vel.linear.x = 0.2  # Velocidade linear reduzida para maior precisão
-                    cmd_vel.angular.z = 0.5 * (angle_to_goal - yaw)  # Ajuste da velocidade angular durante o movimento
+                    cmd_vel.angular.z = 0.5 * angular_error  # Ajuste da velocidade angular durante o movimento
             else:
                 self.current_goal_index += 1
                 self.get_logger().info(f'Moving to next waypoint: {self.current_goal_index}')
