@@ -8,7 +8,6 @@ docker compose up ros-master
 ---
 ## Os próximos comandos são executados dentro do Docker
 
-
 Compilando o workspace:<br>
 ```bash
 colcon build
@@ -38,5 +37,4 @@ ex:
 ```bash
 ros2 launch <nome_do_pacote> <nome_do_nó>
 # ex: ros2 launch meu_primeiro_pacote meu_primeiro_launch.py
-
 ```

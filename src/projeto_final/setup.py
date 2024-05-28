@@ -20,13 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'r2d2 = projeto_final.r2d2:main',
-            'robot = projeto_final.robot:main',
-            'A_Star = projeto_final.A_Star:main',
-            'teste = projeto_final.teste:main',
-            'teste_A = projeto_final.teste_A:main',
-            'robotcontrol = projeto_final.robotcontrol:main',
-            'astar = projeto_final.astar:main'
+            'RobotControl = projeto_final.RobotControl:main',
+            'AStar = projeto_final.AStar:main'
         ],
     },
 )
